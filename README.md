@@ -1,2 +1,2 @@
-# instant_gram
+# InstantGram
 
