@@ -41,9 +41,7 @@ class MainView extends StatelessWidget {
         body: Center(
           child: Consumer(builder: (_, ref, __) {
             return ElevatedButton(
-              onPressed: () {
-                ref.read(authStaeProvider.notifier).logOut();
-              },
+              onPressed: () => ref.read(authStaeProvider.notifier).logOut(),
               child: Text('Sign Out'),
             );
           }),

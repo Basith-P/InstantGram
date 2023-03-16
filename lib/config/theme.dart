@@ -10,6 +10,10 @@ class AppTheme {
           elevation: 0,
           centerTitle: true,
         ),
+
+        // progress indicator color black strok 2
+        progressIndicatorTheme: ProgressIndicatorThemeData(
+            color: Colors.black, linearTrackColor: Colors.black12),
       );
 
   static final lightTheme = ThemeData.light(useMaterial3: true);
