@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:instant_gram/views/components/loading/loading_screen.dart';
 
 import 'config/theme.dart';
 import 'firebase_options.dart';
 import 'state/auth/providers/providers.dart';
+import 'state/providers/is_loading_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +25,14 @@ class App extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
       home: Consumer(builder: (_, ref, __) {
+        /// Listen to [loading state]
+        ref.listen(isLoadingProvider, (_, isLoading) {
+          if (isLoading)
+            LoadingScreen.instance().show(context);
+          else
+            LoadingScreen.instance().hide();
+        });
+
         final isLoggedin = ref.watch(isLoggedinProvider);
         debugPrint('isLoggedin: $isLoggedin');
         return isLoggedin ? const MainView() : const LoginView();
