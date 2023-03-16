@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -7,8 +8,9 @@ import '../constants/constants.dart';
 import '../models/auth_result.dart';
 
 class Authenticator {
-  final _firebaseAuth = FirebaseAuth.instance;
-  User? get user => _firebaseAuth.currentUser;
+  const Authenticator();
+
+  User? get user => FirebaseAuth.instance.currentUser;
   UserId? get userId => user?.uid;
   bool get isLoggedIn => user != null;
   String? get email => user?.email;
@@ -31,9 +33,11 @@ class Authenticator {
     );
 
     try {
-      await _firebaseAuth.signInWithCredential(credential);
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      debugPrint('===============>>Google Login success');
       return AuthResult.success;
     } catch (e) {
+      debugPrint('===============>>$e');
       return AuthResult.failure;
     }
   }
@@ -46,7 +50,7 @@ class Authenticator {
     final oauthCredentials = FacebookAuthProvider.credential(token);
 
     try {
-      await _firebaseAuth.signInWithCredential(oauthCredentials);
+      await FirebaseAuth.instance.signInWithCredential(oauthCredentials);
       return AuthResult.success;
     } on FirebaseAuthException catch (e) {
       final email = e.email;
@@ -55,10 +59,11 @@ class Authenticator {
       if (e.code == Constants.accountExistsWithDifferentCredential &&
           email != null &&
           credential != null) {
-        final providers = await _firebaseAuth.fetchSignInMethodsForEmail(email);
+        final providers =
+            await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
         if (providers.contains(Constants.googleCom)) {
           await loginWithGoogle();
-          _firebaseAuth.currentUser?.linkWithCredential(credential);
+          FirebaseAuth.instance.currentUser?.linkWithCredential(credential);
         }
         return AuthResult.success;
       }
@@ -67,7 +72,7 @@ class Authenticator {
   }
 
   Future<void> logOut() async {
-    await _firebaseAuth.signOut();
+    await FirebaseAuth.instance.signOut();
     await GoogleSignIn().signOut();
     await FacebookAuth.instance.logOut();
   }

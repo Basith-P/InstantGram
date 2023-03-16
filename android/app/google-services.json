@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "477578642629-h6rign8pr8b3u74vupgcq7n2v3kdtr7t.apps.googleusercontent.com",
+          "client_id": "477578642629-goiikat23t8r14uku2kt3b4gefb4663m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bns.instant_gram",
+            "certificate_hash": "2e62b2e92a3cf42dece39805ae69ccca8b2ce760"
+          }
+        },
+        {
+          "client_id": "477578642629-lurqhldovjf7eakbtqo8nfreij6j08lq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
