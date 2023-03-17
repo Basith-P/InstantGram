@@ -1,12 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:instant_gram/views/components/loading/loading_screen.dart';
 
 import 'config/theme.dart';
 import 'firebase_options.dart';
 import 'state/auth/providers/providers.dart';
 import 'state/providers/is_loading_provider.dart';
+import 'views/components/loading/loading_screen.dart';
+import 'views/login/login_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,32 +60,32 @@ class MainView extends StatelessWidget {
   }
 }
 
-class LoginView extends ConsumerWidget {
-  const LoginView({super.key});
+// class LoginView extends ConsumerWidget {
+//   const LoginView({super.key});
 
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Login View')),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ElevatedButton(
-              onPressed: () =>
-                  ref.read(authStaeProvider.notifier).loginWithGoogle,
-              child: Text('Login with Google'),
-            ),
-            ElevatedButton(
-              onPressed: () =>
-                  ref.read(authStaeProvider.notifier).loginWithFacebook,
-              child: Text('Login with Facebook'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text('Login View')),
+//       body: Padding(
+//         padding: const EdgeInsets.all(8.0),
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           crossAxisAlignment: CrossAxisAlignment.stretch,
+//           children: [
+//             ElevatedButton(
+//               onPressed: () =>
+//                   ref.read(authStaeProvider.notifier).loginWithGoogle,
+//               child: Text('Login with Google'),
+//             ),
+//             ElevatedButton(
+//               onPressed: () =>
+//                   ref.read(authStaeProvider.notifier).loginWithFacebook,
+//               child: Text('Login with Facebook'),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
